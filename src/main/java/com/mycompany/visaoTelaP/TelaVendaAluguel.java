@@ -10,6 +10,7 @@ import com.mycompany.ferramentas.DadosTemporarios;
 import com.mycompany.ferramentas.Formularios;
 import com.mycompany.modelo.ModCliente;
 import com.mycompany.modelo.ModProduto;
+import com.mycompany.visaoOutros.MenuPrincipal;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
@@ -223,10 +224,20 @@ public class TelaVendaAluguel extends javax.swing.JFrame {
         btnAluguel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btnAluguel.setText("Aluguel");
         btnAluguel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAluguelActionPerformed(evt);
+            }
+        });
 
         btnVenda.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         btnVenda.setText("Venda");
         btnVenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVendaActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel12.setText("Cliente");
@@ -400,6 +411,14 @@ public class TelaVendaAluguel extends javax.swing.JFrame {
             System.err.println(e.getMessage());
         }
     }//GEN-LAST:event_tableClienteMouseClicked
+
+    private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
+        new MenuVenda().setVisible(true);
+    }//GEN-LAST:event_btnVendaActionPerformed
+
+    private void btnAluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAluguelActionPerformed
+         new MenuAluguel().setVisible(true);
+    }//GEN-LAST:event_btnAluguelActionPerformed
 
     /**
      * @param args the command line arguments

@@ -10,4 +10,37 @@ package com.mycompany.modelo;
  */
 public class ModCliente {
     
+     private int id;
+    private int idClientes;
+
+    public ModCliente(int id, int idClientes) {
+        this.id = id;
+        this.idClientes = idClientes;
+        
+}
+
+    public ModCliente() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdClientes() {
+        return idClientes;
+    }
+
+    public void setIdClientes(int idClientes) {
+        this.idClientes = idClientes;
+    }
+
+    @Override
+    public String toString() {
+        return "ModCliente{" + "id=" + id + ", idClientes=" + idClientes + '}';
+    }
+    
 }

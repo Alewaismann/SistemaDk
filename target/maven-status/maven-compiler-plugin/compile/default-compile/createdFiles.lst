@@ -26,6 +26,7 @@ com\mycompany\visaoTelaP\TelaVendaAluguel$5.class
 com\mycompany\visaoProdutos\ListProduto.class
 com\mycompany\modelo\ModCliente.class
 com\mycompany\modelo\ModProduto.class
+com\mycompany\visaoTelaP\TelaVendaAluguel$7.class
 com\mycompany\visaoOutros\MenuPrincipal.class
 com\mycompany\ferramentas\DadosTemporarios.class
 com\mycompany\visaoAluguel\ListAluguel.class
@@ -44,6 +45,7 @@ com\mycompany\visaoClientes\ListCliente$1.class
 com\mycompany\visaoTelaP\MenuAluguel.class
 com\mycompany\dao\daoCliente.class
 com\mycompany\visaoProdutos\ListProduto$1.class
+com\mycompany\visaoTelaP\TelaVendaAluguel$8.class
 com\mycompany\dao\daoProduto.class
 com\mycompany\visaoOutros\MenuPrincipal$6.class
 com\mycompany\ferramentas\BancoDeDadosMySql.class
@@ -51,6 +53,7 @@ com\mycompany\visaoOutros\MenuPrincipal$12.class
 com\mycompany\visaoOutros\MenuPrincipal$7.class
 com\mycompany\visaoTelaP\MenuP$3.class
 com\mycompany\visaoOutros\Utilitarios.class
+com\mycompany\visaoTelaP\MenuAluguel$2.class
 com\mycompany\visaoTelaP\MenuVenda.class
 com\mycompany\visaoTelaP\TelaVendaAluguel.class
 com\mycompany\visaoClientes\CadCliente.class
@@ -65,6 +68,7 @@ com\mycompany\visaoProdutos\CadProduto$1.class
 com\mycompany\modelo\ModAluguel.class
 com\mycompany\visaoOutros\MenuPrincipal$13.class
 com\mycompany\visaoCategorias\ListCategoria.class
+com\mycompany\visaoTelaP\MenuAluguel$3.class
 com\mycompany\visaoTelaP\MenuP$1.class
 com\mycompany\visaoOutros\MenuPrincipal$5.class
 com\mycompany\visaoTelaP\MenuP$4.class
