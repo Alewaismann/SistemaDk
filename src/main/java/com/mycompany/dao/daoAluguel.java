@@ -14,18 +14,18 @@ import java.sql.ResultSet;
 public class daoAluguel  extends BancoDeDadosMySql{
     private String sql;
     
-    public Boolean inserir(int id, int idCliente, int idProduto, String dataAluguel, String dataDevolucao, int total){
+    public Boolean inserir(int id, int idCliente, int idProduto, String dataAluguel, String dataDevolucao, double total){
         try{
-            sql = "INSERT INTO PEDIDO (ID, ID_CLIENTE, ID_PRODUTO, TOTAL, DATA_ALUGUEL, DATA_DEVOLUÇÃO) VALUES (?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO ALUGUEL (ID, ID_CLIENTES, ID_PRODUTO, DATA_ALUGUEL, DATA_DEVOLUÇÃO, TOTAL) VALUES (?, ?, ?, ?, ?, ?)";
             
             setStatement(getConexao().prepareStatement(sql));
             
             getStatement().setInt(1, id);
             getStatement().setInt(2, idCliente);
             getStatement().setInt(3, idProduto);
-            getStatement().setInt(4, total);
-            getStatement().setString(5, dataAluguel);
-            getStatement().setString(6, dataDevolucao);
+            getStatement().setString(4, dataAluguel);
+            getStatement().setString(5, dataDevolucao);
+            getStatement().setDouble(6, total);
             
             
             getStatement().executeUpdate();
@@ -42,17 +42,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
-                "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
-                "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
+                "   P.DATA_ALUGUEL AS DATA_ALUGUEL,   " +
+                "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO," +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " ;
@@ -72,17 +72,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -106,17 +106,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -140,17 +140,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -174,17 +174,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -208,17 +208,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -242,17 +242,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -276,17 +276,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -310,17 +310,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -344,17 +344,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -378,17 +378,17 @@ public class daoAluguel  extends BancoDeDadosMySql{
             sql = 
                 " SELECT                              " +
                 "   P.ID AS ID,                       " +
-                "   PES.NOME AS PESSOA,               " +
+                "   PES.NOME AS CLIENTES,               " +
                 "   PRO.NOME AS PRODUTO,              " +
                 "   P.DATA_ALUGUEL AS DATA_ALUGUEL,     " +
                 "   P.DATA_DEVOLUÇÃO AS DATA_DEVOLUÇÃO,     " +
                 "   P.TOTAL AS TOTAL,       " +
                 "   P.TOTAL * PRO.PRECO AS VALOR FINAL " +
                 " FROM                                " +
-                "   PEDIDO P                          " +
+                "   ALUGUEL P                          " +
                 " JOIN CLIENTE C ON                   " +
                 "   C.ID = P.ID_CLIENTE               " +
-                " JOIN PESSOA PES ON                  " +
+                " JOIN CLIENTES PES ON                  " +
                 "   PES.ID = C.ID_PESSOA              " +
                 " JOIN PRODUTO PRO ON                 " +
                 "   PRO.ID = P.ID_PRODUTO             " +
@@ -411,7 +411,7 @@ public class daoAluguel  extends BancoDeDadosMySql{
         int id = 0;
         
         try{
-            sql = "SELECT IFNULL(MAX(ID), 0) + 1 FROM PEDIDO";
+            sql = "SELECT IFNULL(MAX(ID), 0) + 1 FROM ALUGUEL";
             
             setStatement(getConexao().prepareStatement(sql));
             

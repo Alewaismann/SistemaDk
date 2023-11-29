@@ -14,16 +14,16 @@ import java.sql.ResultSet;
 public class daoVenda  extends BancoDeDadosMySql{
     private String sql;
     
-    public Boolean inserir(int id, int idCliente, int idProduto, String dataPedido, int total){
+    public Boolean inserir(int id, int idCliente, int idProduto, String dataPedido, double total){
         try{
-            sql = "INSERT INTO PEDIDO (ID, ID_CLIENTE, ID_PRODUTO, TOTAL, DATA_PEDIDO) VALUES (?, ?, ?, ?, ?)";
+            sql = "INSERT INTO VENDAS (ID, ID_CLIENTE, ID_PRODUTO, TOTAL, DATA_PEDIDO) VALUES (?, ?, ?, ?, ?)";
             
             setStatement(getConexao().prepareStatement(sql));
             
             getStatement().setInt(1, id);
             getStatement().setInt(2, idCliente);
             getStatement().setInt(3, idProduto);
-            getStatement().setInt(4, total);
+            getStatement().setDouble(4, total);
             getStatement().setString(5, dataPedido);
             
             
@@ -399,7 +399,7 @@ public class daoVenda  extends BancoDeDadosMySql{
         int id = 0;
         
         try{
-            sql = "SELECT IFNULL(MAX(ID), 0) + 1 FROM PEDIDO";
+            sql = "SELECT IFNULL(MAX(ID), 0) + 1 FROM VENDAS";
             
             setStatement(getConexao().prepareStatement(sql));
             

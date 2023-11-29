@@ -8,6 +8,7 @@ com\mycompany\modelo\ModVenda.class
 com\mycompany\dao\daoVenda.class
 com\mycompany\visaoAluguel\CadAluguel$1.class
 com\mycompany\visaoAluguel\ListAluguel$1.class
+com\mycompany\visaoTelaP\MenuVenda$2.class
 com\mycompany\visaoTelaP\MenuP$2.class
 com\mycompany\visaoTelaP\TelaVendaAluguel$2.class
 com\mycompany\dao\daoEstoque.class

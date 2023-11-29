@@ -8,10 +8,13 @@ import com.mycompany.dao.daoCliente;
 import com.mycompany.dao.daoVenda;
 import com.mycompany.ferramentas.DadosTemporarios;
 import com.mycompany.ferramentas.Formularios;
+import com.mycompany.modelo.ModAluguel;
 import com.mycompany.modelo.ModCliente;
 import com.mycompany.modelo.ModProduto;
+import com.mycompany.modelo.ModVenda;
 import com.mycompany.visaoOutros.MenuPrincipal;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,19 +39,19 @@ public class TelaVendaAluguel extends javax.swing.JFrame {
         
         calculaTotalCompra(Double.parseDouble(labelPreco.getText()), Integer.parseInt(labelQuantidade.getText()));
         
-        tfIdVenda.setVisible(false);
-        tfIdProduto.setVisible(false);
-        tfIdCliente.setVisible(false);
+//        tfIdVenda.setVisible(false);
+//        tfIdProduto.setVisible(false);
+//        tfIdCliente.setVisible(false);
         
         listarTodos();
     }
 
     private Boolean existeDadosTemporarios(){        
-        if(DadosTemporarios.tempObject instanceof ModProduto){
-            int id = ((ModProduto) DadosTemporarios.tempObject).getId();
-            String nome = ((ModProduto) DadosTemporarios.tempObject).getNome();
-            Double preco = ((ModProduto) DadosTemporarios.tempObject).getPreco();
-            String descricao = ((ModProduto) DadosTemporarios.tempObject).getDescricao();
+        if(DadosTemporarios.tempObjectCliente instanceof ModProduto){
+            int id = ((ModProduto) DadosTemporarios.tempObjectCliente).getId();
+            String nome = ((ModProduto) DadosTemporarios.tempObjectCliente).getNome();
+            Double preco = ((ModProduto) DadosTemporarios.tempObjectCliente).getPreco();
+            String descricao = ((ModProduto) DadosTemporarios.tempObjectCliente).getDescricao();
             String categoria = DadosTemporarios.categoriaProdutoVenda;
            
             int idCliente = DadosTemporarios.idUsuarioLogado;
@@ -65,7 +68,7 @@ public class TelaVendaAluguel extends javax.swing.JFrame {
            
             
             
-            DadosTemporarios.tempObject = null;
+            DadosTemporarios.tempObjectCliente = null;
             DadosTemporarios.categoriaProdutoVenda = null;
             
             
@@ -136,6 +139,7 @@ public class TelaVendaAluguel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         labelProduto = new javax.swing.JLabel();
@@ -158,6 +162,9 @@ public class TelaVendaAluguel extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCliente = new javax.swing.JTable();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -394,30 +401,73 @@ public class TelaVendaAluguel extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void tableClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClienteMouseClicked
-         try{
-            if (evt.getClickCount() == 2){
-                //Pega os dados da pessoa
-                ModCliente modCliente = new ModCliente();
-
-                daoCliente daoCliente1 = new daoCliente();
-                //ResultSet = daoCliente.listarPorIdCliente(Integer.parseInt(String.valueOf(tableCliente.getValueAt(tableCliente.getSelectedRow(), 0))));
-
-                ModCliente modCliente1 = new ModCliente();
-             
-                DadosTemporarios.tempObject = (ModCliente) modCliente;
+        try{
+//            if (evt.getClickCount() == 2){
+//                //Pega os dados da pessoa
+//                ModCliente modCliente = new ModCliente();
+//
+//                daoCliente daoCliente1 = new daoCliente();
+//                //ResultSet = daoCliente.listarPorIdCliente(Integer.parseInt(String.valueOf(tableCliente.getValueAt(tableCliente.getSelectedRow(), 0))));
+//
+//                ModCliente modCliente1 = new ModCliente();
+//             
+//                DadosTemporarios.tempObject = (ModCliente) modCliente;
                
-            }
+                //Dados do cliente
+                int idCliente = Integer.parseInt(String.valueOf(tableCliente.getValueAt(tableCliente.getSelectedRow(), 0)));
+                String nomeCliente = String.valueOf(tableCliente.getValueAt(tableCliente.getSelectedRow(), 1));
+                
+                //Dados do produto
+                int idProduto = Integer.parseInt(tfIdProduto.getText());
+                String nomeProduto = labelProduto.getText();
+                
+                //Dados aluguel
+                double total = Double.parseDouble(labelVenda.getText());
+                
+                if(DadosTemporarios.tempObjectCliente != null){
+                    DadosTemporarios.tempObjectCliente = null;
+                    DadosTemporarios.tempObjectProduto = null;
+                    DadosTemporarios.tempObjectAluguel = null;
+                    DadosTemporarios.tempObjectVenda = null;
+                }
+                    
+                ModCliente modCliente = new ModCliente();
+                ModProduto modProduto = new ModProduto();
+                ModAluguel modAluguel = new ModAluguel();
+                ModVenda modVenda = new ModVenda();
+                //Objeto do cliente
+                modCliente.setId(idCliente);
+                modCliente.setNome(nomeCliente);
+                
+                //Objeto do produto
+                modProduto.setId(idProduto);
+                modProduto.setNome(nomeProduto);
+                
+                //Objeto do aluguel
+                modAluguel.setTotal(total);
+                
+                DadosTemporarios.tempObjectCliente = modCliente;
+                DadosTemporarios.tempObjectProduto = modProduto;
+                DadosTemporarios.tempObjectAluguel = modAluguel;
+                DadosTemporarios.tempObjectVenda = modVenda;
+//            }
         }catch(Exception e){
             System.err.println(e.getMessage());
         }
     }//GEN-LAST:event_tableClienteMouseClicked
 
     private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
+        if(DadosTemporarios.tempObjectCliente != null) 
         new MenuVenda().setVisible(true);
+          else
+            JOptionPane.showMessageDialog(null, "Por favor, selecione um cliente.");
     }//GEN-LAST:event_btnVendaActionPerformed
 
     private void btnAluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAluguelActionPerformed
-         new MenuAluguel().setVisible(true);
+        if(DadosTemporarios.tempObjectCliente != null) 
+            new MenuAluguel().setVisible(true);
+        else
+            JOptionPane.showMessageDialog(null, "Por favor, selecione um cliente.");
     }//GEN-LAST:event_btnAluguelActionPerformed
 
     /**
@@ -467,6 +517,7 @@ public class TelaVendaAluguel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel labelPreco;

@@ -9,9 +9,10 @@ package com.mycompany.ferramentas;
  * @author alexandre.9930
  */
 public class DadosTemporarios {
-    public static Object tempObject;
-    public static Object tempObject2; 
-    public static Object tempObject3;
+    public static Object tempObjectCliente;
+    public static Object tempObjectProduto; 
+    public static Object tempObjectAluguel;
+    public static Object tempObjectVenda;
     
     public static String categoriaProdutoVenda;
     

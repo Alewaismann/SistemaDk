@@ -216,7 +216,7 @@ public class MenuP extends javax.swing.JFrame {
                 modProduto.setPreco(Double.parseDouble(String.valueOf(tableProduto.getValueAt(tableProduto.getSelectedRow(), 1))));
                 modProduto.setDescricao(descricao);
                 
-                DadosTemporarios.tempObject = (ModProduto) modProduto;
+                DadosTemporarios.tempObjectCliente = (ModProduto) modProduto;
                 DadosTemporarios.categoriaProdutoVenda = categoria;
                
                 

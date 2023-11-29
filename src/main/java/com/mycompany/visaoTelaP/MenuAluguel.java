@@ -6,6 +6,7 @@ package com.mycompany.visaoTelaP;
 
 import com.mycompany.dao.daoAluguel;
 import com.mycompany.ferramentas.DadosTemporarios;
+import com.mycompany.modelo.ModAluguel;
 import com.mycompany.modelo.ModCliente;
 import com.mycompany.modelo.ModProduto;
 import java.time.LocalDateTime;
@@ -29,38 +30,51 @@ public class MenuAluguel extends javax.swing.JFrame {
         
         existeDadosTemporarios();
         
+        try{
+            daoAluguel aluguel = new daoAluguel();
+            
+            tfId.setText(String.valueOf(aluguel.buscarProximoId()));
+        }catch(Exception e){
         
-        
-        tfIdProduto.setVisible(false);
-        tfIdCliente.setVisible(false);
+        }
+       tfId.setVisible(false);
+       tfIdProduto.setVisible(false);
+       tfIdCliente.setVisible(false);
     }
+    
     private Boolean existeDadosTemporarios(){        
-        if(DadosTemporarios.tempObject instanceof ModProduto){
-            int id = ((ModProduto) DadosTemporarios.tempObject).getId();
-            String nome = ((ModProduto) DadosTemporarios.tempObject).getNome();
-            Double preco = ((ModProduto) DadosTemporarios.tempObject).getPreco();
-            String descricao = ((ModProduto) DadosTemporarios.tempObject).getDescricao();
-            String categoria = DadosTemporarios.categoriaProdutoVenda;
-           // String marca = DadosTemporarios.marcaProdutoVenda;
-            int idCliente = DadosTemporarios.idUsuarioLogado;
+        if(DadosTemporarios.tempObjectCliente instanceof ModCliente){
+//            int id = ((ModProduto) DadosTemporarios.tempObject).getId();
+//            String nome = ((ModProduto) DadosTemporarios.tempObject).getNome();
+//            Double preco = ((ModProduto) DadosTemporarios.tempObject).getPreco();
+//            String descricao = ((ModProduto) DadosTemporarios.tempObject).getDescricao();
+//            String categoria = DadosTemporarios.categoriaProdutoVenda;
+//           // String marca = DadosTemporarios.marcaProdutoVenda;
+//            int idCliente = DadosTemporarios.idUsuarioLogado;
+//            
+//            int proximoIdPedido = new daoAluguel().buscarProximoId();
+//            
+//           // tfIdPedido.setText(String.valueOf(proximoIdPedido));
+//            tfIdCliente.setText(String.valueOf(idCliente));
+//            tfIdProduto.setText(String.valueOf(id));
+//            
+//            
+//            LbCliente.setText(nome);
+//            LbProduto.setText(nome);
+//            //labelPreco.setText(String.valueOf(preco));
+//            //labelCategoriaProduto.setText(categoria);
+//            //labelMarcaProduto.setText(marca);
+//            //taDescricao.setText(descricao);
+//            
+//            DadosTemporarios.tempObject = null;
+//            DadosTemporarios.categoriaProdutoVenda = null;
+//          //DadosTemporarios.marcaProdutoVenda = null;
             
-            int proximoIdPedido = new daoAluguel().buscarProximoId();
-            
-           // tfIdPedido.setText(String.valueOf(proximoIdPedido));
-            tfIdCliente.setText(String.valueOf(idCliente));
-            tfIdProduto.setText(String.valueOf(id));
-            
-            
-            LbCliente.setText(nome);
-            LbProduto.setText(nome);
-            //labelPreco.setText(String.valueOf(preco));
-            //labelCategoriaProduto.setText(categoria);
-            //labelMarcaProduto.setText(marca);
-            //taDescricao.setText(descricao);
-            
-            DadosTemporarios.tempObject = null;
-            DadosTemporarios.categoriaProdutoVenda = null;
-          //DadosTemporarios.marcaProdutoVenda = null;
+            tfIdCliente.setText(String.valueOf(((ModCliente) DadosTemporarios.tempObjectCliente).getId()));
+            LbCliente.setText(((ModCliente) DadosTemporarios.tempObjectCliente).getNome());
+
+            tfIdProduto.setText(String.valueOf(((ModProduto) DadosTemporarios.tempObjectProduto).getId()));
+            LbProduto.setText(((ModProduto) DadosTemporarios.tempObjectProduto).getNome());
             
             return true;
         }else
@@ -86,6 +100,11 @@ public class MenuAluguel extends javax.swing.JFrame {
         LbCliente = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         LbProduto = new javax.swing.JLabel();
+        tfPreco = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tfId = new javax.swing.JTextField();
+        tfData_Dev = new javax.swing.JTextField();
+        tfData_Al = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Confirmação");
@@ -115,58 +134,75 @@ public class MenuAluguel extends javax.swing.JFrame {
 
         LbProduto.setText("nome");
 
+        jLabel4.setText("Preço Aluguel");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfData_Al, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfData_Dev, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tfPreco, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(LbCliente)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(LbProduto))
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(jButton2)))
+                        .addGap(18, 87, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LbCliente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LbProduto)
-                                .addGap(0, 93, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(tfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                                .addComponent(tfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(28, 28, 28)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(LbCliente)
                     .addComponent(jLabel3)
                     .addComponent(LbProduto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfData_Al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfData_Dev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -181,21 +217,23 @@ public class MenuAluguel extends javax.swing.JFrame {
     }//GEN-LAST:event_tfIdProdutoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          try{
-              DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-              LocalDateTime now = LocalDateTime.now();  
+        try{
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            //LocalDateTime now = LocalDateTime.now();  
+
+            daoAluguel aluguel = new daoAluguel();
             
-              daoAluguel daoAluguel1 = new daoAluguel();
-            
-            //int id = Integer.parseInt(tfIdPedido.getText());
+            int id = Integer.parseInt(tfId.getText());
             int idCliente = Integer.parseInt(tfIdCliente.getText());
             int idProduto = Integer.parseInt(tfIdProduto.getText());
-            String dataPedido = now.toString();
+            String dataAluguel = LocalDateTime.now().toString();
+            double total = Double.parseDouble(tfPreco.getText());
+//            String dataPedido = now.toString();
           //  int quantidade = Integer.parseInt(labelQuantidadeCompra.getText());
             
-           // daoPedido.inserir(id, idCliente, idProduto, dataPedido, quantidade);
-            
-              JOptionPane.showMessageDialog(null, "Aluguel, " + DadosTemporarios.usuarioLogado + ", feito com sucesso!");
+            aluguel.inserir(id, idCliente, idProduto,dataAluguel , tfData_Dev.getText(), total);
+
+            JOptionPane.showMessageDialog(null, "Aluguel feito com sucesso!");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Houve um problema ao tentar salvar o aluguel!");
         }
@@ -244,7 +282,12 @@ public class MenuAluguel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField tfData_Al;
+    private javax.swing.JTextField tfData_Dev;
+    private javax.swing.JTextField tfId;
     private javax.swing.JTextField tfIdCliente;
     private javax.swing.JTextField tfIdProduto;
+    private javax.swing.JTextField tfPreco;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,15 @@
  */
 package com.mycompany.visaoTelaP;
 
+import com.mycompany.dao.daoVenda;
+import com.mycompany.ferramentas.DadosTemporarios;
+import com.mycompany.modelo.ModCliente;
+import com.mycompany.modelo.ModProduto;
+import com.mycompany.modelo.ModVenda;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alexandre.9930
@@ -15,6 +24,61 @@ public class MenuVenda extends javax.swing.JFrame {
      */
     public MenuVenda() {
         initComponents();
+        
+         setLocationRelativeTo(null);
+        
+        existeDadosTemporarios();
+        
+        try{
+            daoVenda venda = new daoVenda();
+            
+            tfId.setText(String.valueOf(venda.buscarProximoId()));
+        }catch(Exception e){
+        
+        }
+       tfId.setVisible(false);
+       tfIdProduto.setVisible(false);
+       tfIdCliente.setVisible(false);
+    }
+    private Boolean existeDadosTemporarios(){        
+        if(DadosTemporarios.tempObjectCliente instanceof ModCliente){
+//            int id = ((ModProduto) DadosTemporarios.tempObject).getId();
+//            String nome = ((ModProduto) DadosTemporarios.tempObject).getNome();
+//            Double preco = ((ModProduto) DadosTemporarios.tempObject).getPreco();
+//            String descricao = ((ModProduto) DadosTemporarios.tempObject).getDescricao();
+//            String categoria = DadosTemporarios.categoriaProdutoVenda;
+//           // String marca = DadosTemporarios.marcaProdutoVenda;
+//            int idCliente = DadosTemporarios.idUsuarioLogado;
+//            
+//            int proximoIdPedido = new daoAluguel().buscarProximoId();
+//            
+//           // tfIdPedido.setText(String.valueOf(proximoIdPedido));
+//            tfIdCliente.setText(String.valueOf(idCliente));
+//            tfIdProduto.setText(String.valueOf(id));
+//            
+//            
+//            LbCliente.setText(nome);
+//            LbProduto.setText(nome);
+//            //labelPreco.setText(String.valueOf(preco));
+//            //labelCategoriaProduto.setText(categoria);
+//            //labelMarcaProduto.setText(marca);
+//            //taDescricao.setText(descricao);
+//            
+//            DadosTemporarios.tempObject = null;
+//            DadosTemporarios.categoriaProdutoVenda = null;
+//          //DadosTemporarios.marcaProdutoVenda = null;
+           
+            tfIdCliente.setText(String.valueOf(((ModCliente) DadosTemporarios.tempObjectCliente).getId()));
+            LbCliente.setText(((ModCliente) DadosTemporarios.tempObjectCliente).getNome());
+
+            tfIdProduto.setText(String.valueOf(((ModProduto) DadosTemporarios.tempObjectProduto).getId()));
+            LbProduto.setText(((ModProduto) DadosTemporarios.tempObjectProduto).getNome());
+            
+            
+            tfPreco.setText(String.valueOf(((ModVenda) DadosTemporarios.tempObjectVenda).getTotal()));
+            return true;
+        }else
+            return false;
     }
 
     /**
@@ -26,21 +90,125 @@ public class MenuVenda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        tfIdProduto = new javax.swing.JTextField();
+        tfIdCliente = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        LbCliente = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        LbProduto = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        tfPreco = new javax.swing.JTextField();
+        tfId = new javax.swing.JTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setText("Confirme os dados:");
+
+        jLabel2.setText("O cliente");
+
+        LbCliente.setText("nome");
+
+        jLabel3.setText("esta comprando o produto");
+
+        LbProduto.setText("nome");
+
+        jButton1.setText("Cancelar");
+
+        jButton2.setText("Confirmar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(LbCliente)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(LbProduto)
+                                        .addGap(50, 50, 50)
+                                        .addComponent(tfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(tfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(23, 23, 23))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(LbCliente)
+                    .addComponent(jLabel3)
+                    .addComponent(LbProduto)
+                    .addComponent(tfPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(32, 32, 32))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try{
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            //LocalDateTime now = LocalDateTime.now();  
+
+            daoVenda venda = new daoVenda();
+            
+            int id = Integer.parseInt(tfId.getText());
+            int idCliente = Integer.parseInt(tfIdCliente.getText());
+            int idProduto = Integer.parseInt(tfIdProduto.getText());
+            String dataVenda = LocalDateTime.now().toString();
+            double total = Double.parseDouble(tfPreco.getText());
+//            String dataPedido = now.toString();
+          //  int quantidade = Integer.parseInt(labelQuantidadeCompra.getText());
+            
+            venda.inserir(id, idCliente, idProduto,dataVenda ,total);
+
+            JOptionPane.showMessageDialog(null, "Venda feito com sucesso!");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Houve um problema ao tentar salvar a venda!");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +246,16 @@ public class MenuVenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LbCliente;
+    private javax.swing.JLabel LbProduto;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField tfId;
+    private javax.swing.JTextField tfIdCliente;
+    private javax.swing.JTextField tfIdProduto;
+    private javax.swing.JTextField tfPreco;
     // End of variables declaration//GEN-END:variables
 }
