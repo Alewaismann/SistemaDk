@@ -14,9 +14,9 @@ import java.sql.ResultSet;
 public class daoCliente extends BancoDeDadosMySql{
     String sql;
     
-    public Boolean inserir(int id,  String nome, String sobrenome,  String telefone, String email, String cidade){
+    public Boolean inserir(int id,  String nome, String sobrenome,  String telefone, String email, String cidade,  String usuario, String senha){
         try{
-            sql = "INSERT INTO CLIENTES (ID, NOME, SOBRENOME, TELEFONE, EMAIL, CIDADE) VALUES (?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO CLIENTES (ID, NOME, SOBRENOME, TELEFONE, EMAIL, CIDADE, USUARIO, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             
             setStatement(getConexao().prepareStatement(sql));
             
@@ -26,6 +26,8 @@ public class daoCliente extends BancoDeDadosMySql{
             getStatement().setString(4, telefone);
             getStatement().setString(5, email);
             getStatement().setString(6, cidade);
+             getStatement().setString(7, usuario);
+            getStatement().setString(8, senha);
             
             getStatement().executeUpdate();
             
@@ -127,6 +129,7 @@ public class daoCliente extends BancoDeDadosMySql{
             setResultado(getStatement().executeQuery());
         }catch(Exception e){
             System.out.println(e.getMessage());
+            
         }
         
         return getResultado();
@@ -271,8 +274,48 @@ public class daoCliente extends BancoDeDadosMySql{
         
         return getResultado();
     }
-    
-    
+     public ResultSet recuperaSenha(String usuario){
+        try{
+            sql = 
+                " SELECT                            " +
+                "   ID,                             " +
+                "   SENHA                           " +
+                " FROM                              " +
+                "   CLIENTES                         " +
+                " WHERE USUARIO = ?                 " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(1, usuario);
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+     }
+      public ResultSet listarPorIdPessoa(int idPessoa){
+        try{
+            sql = 
+                " SELECT                            " +
+                "   ID AS ID                       " +
+//                "   ID_PESSOA AS CIDADE             " +
+                " FROM                              " +
+                "   CLIENTES                         " +
+                " WHERE ID = ?               " ;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(1, idPessoa);
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return getResultado();
+      }
+      
     public int buscarProximoId(){
         int id = -1;
         

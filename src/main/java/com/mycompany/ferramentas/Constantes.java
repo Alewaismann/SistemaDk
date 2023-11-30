@@ -15,4 +15,13 @@ public class Constantes {
     public static String LABEL_ENTRAR = "Entrar";
     public static String LABEL_SAIR = "Sair";
     public static String PERGUNTA_ENCERRAR_SESSAO = "Deseja realmete sair?";
+    public static String PREFIXO_USUARIO_LOGADO = "Usuário logado: ";
+    //
+    
+    //Tela de login
+    public static String USUARIO_SENHA_INVALIDOS = "Usuário ou senha inválido";
+    //
+    
+    //Tela cadastro de pessoa
+    public static String CONFIRMACAO_SENHA_DIFERENTE = "As senhas não são condizentes!";
 }

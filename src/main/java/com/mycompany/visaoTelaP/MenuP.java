@@ -6,11 +6,13 @@ package com.mycompany.visaoTelaP;
 
 import com.mycompany.dao.daoProduto;
 import com.mycompany.ferramentas.BancoDeDadosMySql;
+import com.mycompany.ferramentas.Constantes;
 import com.mycompany.ferramentas.DadosTemporarios;
 import com.mycompany.ferramentas.Formularios;
 import com.mycompany.modelo.ModProduto;
 import com.mycompany.visaoOutros.MenuPrincipal;
 import java.sql.ResultSet;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,6 +34,7 @@ public class MenuP extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         
+        setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
        
         
         if (!BancoDeDadosMySql.conectar()){
@@ -39,7 +42,7 @@ public class MenuP extends javax.swing.JFrame {
             System.exit(0);
         }
        
-     
+        labelUsuarioLogado.setText("");
     }
 
     public void listarTodos(){
@@ -88,9 +91,16 @@ public class MenuP extends javax.swing.JFrame {
             }
         }catch(Exception e){
             
-        }
+        }  
     }
-
+   public void verificaUsuarioLogado(){
+        if(!DadosTemporarios.usuarioLogado.equals("")){
+            labelUsuarioLogado.setText(Constantes.PREFIXO_USUARIO_LOGADO + DadosTemporarios.usuarioLogado);
+            
+            labelEntrar.setText(Constantes.LABEL_SAIR);
+           
+        }
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,6 +116,8 @@ public class MenuP extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProduto = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        labelEntrar = new javax.swing.JLabel();
+        labelUsuarioLogado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +158,16 @@ public class MenuP extends javax.swing.JFrame {
             }
         });
 
+        labelEntrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelEntrar.setText("Entrar");
+        labelEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelEntrarMouseClicked(evt);
+            }
+        });
+
+        labelUsuarioLogado.setText("Usuario logado");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,11 +177,14 @@ public class MenuP extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(tfPesquisa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(labelUsuarioLogado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)))
                 .addContainerGap())
@@ -170,12 +195,16 @@ public class MenuP extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                    .addComponent(labelEntrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelUsuarioLogado)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,15 +275,44 @@ public class MenuP extends javax.swing.JFrame {
     }//GEN-LAST:event_tableProdutoMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if(tfPesquisa.getText().equals(""))
+       if(DadosTemporarios.usuarioLogado != null){
+            if(tfPesquisa.getText().equals(""))
                 listarTodos();
             else
                 listarPorProduto(tfPesquisa.getText());
+        }else{
+            JOptionPane.showMessageDialog(null, "Você ainda não está logado. Por favor, realize o login antes de realizar esta operação!");
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         new MenuPrincipal().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void labelEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelEntrarMouseClicked
+       if(labelEntrar.getText().equals(Constantes.LABEL_ENTRAR)){
+            if (Formularios.telaLogin == null)
+                Formularios.telaLogin = new TelaLogin();
+
+            Formularios.telaLogin.setModal(true);
+            Formularios.telaLogin.setVisible(true);
+        }else{
+            int escolha = 
+                JOptionPane.showConfirmDialog(
+                        null, 
+                        Constantes.PERGUNTA_ENCERRAR_SESSAO);
+        
+            if(escolha == JOptionPane.YES_OPTION){
+                DadosTemporarios.idUsuarioLogado = -1;
+                DadosTemporarios.usuarioLogado = null;
+                labelEntrar.setText(Constantes.LABEL_ENTRAR);
+                labelUsuarioLogado.setText("");
+                //labelCadastrar.setVisible(true);
+                
+                ((DefaultTableModel) tableProduto.getModel()).setNumRows(0);
+            }
+        }
+    }//GEN-LAST:event_labelEntrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -296,6 +354,8 @@ public class MenuP extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelEntrar;
+    private javax.swing.JLabel labelUsuarioLogado;
     private javax.swing.JTable tableProduto;
     private javax.swing.JTextField tfPesquisa;
     // End of variables declaration//GEN-END:variables
