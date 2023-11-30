@@ -11,7 +11,7 @@ import com.mycompany.visaoCategorias.CadCategoria;
 import com.mycompany.visaoCategorias.ListCategoria;
 import com.mycompany.visaoClientes.CadCliente;
 import com.mycompany.visaoClientes.ListCliente;
-import com.mycompany.visaoEstoque.CadEstoque;
+
 import com.mycompany.visaoEstoque.ListEstoque;
 import com.mycompany.visaoProdutos.CadProduto;
 import com.mycompany.visaoProdutos.ListProduto;
@@ -227,10 +227,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        if(Formularios.cadEstoque  == null)
-           Formularios.cadEstoque = new CadEstoque();
-           
-           Formularios.cadEstoque.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
