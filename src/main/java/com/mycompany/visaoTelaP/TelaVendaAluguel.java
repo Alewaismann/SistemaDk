@@ -446,6 +446,9 @@ public class TelaVendaAluguel extends javax.swing.JFrame {
                 //Objeto do aluguel
                 modAluguel.setTotal(total);
                 
+                //Objeto da venda
+                modVenda.setTotal(total);
+                
                 DadosTemporarios.tempObjectCliente = modCliente;
                 DadosTemporarios.tempObjectProduto = modProduto;
                 DadosTemporarios.tempObjectAluguel = modAluguel;
